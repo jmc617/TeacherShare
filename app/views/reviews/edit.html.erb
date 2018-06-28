@@ -1,0 +1,17 @@
+<h1>Reviews#edit</h1>
+<p>Find me in app/views/reviews/edit.html.erb</p>
+
+<div class='card'>
+  <h2>edit review</h2>
+
+  <%= form_for @review do |f| %>
+      <div>product</div>
+      <div><%= f.text_field :product %></div>
+      <div>content</div>
+      <div><%= f.text_area :content %></div>
+      <div><%= f.submit "save changes"%></div>
+      <%end%>
+
+  <%= link_to 'Delete', review_path(@review), method: :delete, data:
+  { confirm: 'Are you sure?' } %>
+</div>

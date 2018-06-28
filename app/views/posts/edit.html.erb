@@ -1,0 +1,15 @@
+<h1>Posts#edit</h1>
+<p>Find me in app/views/posts/edit.html.erb</p>
+
+<%= form_for [@group, @post] do |f| %>
+    <div>Title</div>
+    <div><%= f.text_field :title %></div>
+    <div>Content</div>
+    <div><%= f.text_area :description %></div>
+    <div>Price</div>
+    <div><%= f.text_field :price %></div>
+    <div><%= f.submit "publish changes"%></div>
+<%end%>
+
+<%= link_to 'Delete', group_post_path(@post), method: :delete,
+                         data: { confirm: 'Are you sure?' } %>

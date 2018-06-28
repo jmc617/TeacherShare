@@ -1,0 +1,15 @@
+<h1>Reviews#index</h1>
+<p>Find me in app/views/reviews/index.html.erb</p>
+
+
+<%= form_tag("/reviews", method: "get") do %>
+  <%= label_tag(:q, "Search products") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag "Search", name: nil %>
+<% end %>
+
+
+<% @reviews.each do |r| %>
+  <%= link_to "#{r.product}", "/reviews/#{r.id}", class:"" %>
+  <div><%= r.content %></div>
+<% end %>

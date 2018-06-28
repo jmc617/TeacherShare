@@ -1,0 +1,59 @@
+class ReviewsController < ApplicationController
+  def index
+    if params[:q]
+      @reviews = Review.where('product LIKE ?', "%#{params[:q]}%")
+    else
+      @reviews = Review.all
+    end
+  end
+
+  def new
+    @review = Review.new
+  end
+
+  def create
+    review = Review.new(review_params)
+    review.teacher_id = current_teacher.id
+    if review.save
+      flash[:notice] = 'review created!'
+      redirect_to "/reviews"
+    else
+      flash[:alert] = 'error. please try again'
+      render "/reviews/new"
+    end
+  end
+
+  def show
+    @review = Review.find(params[:id])
+  end
+
+  def edit
+    @review = Review.find(params[:id])
+  end
+
+  def update
+    review = Review.find(params[:id])
+    if review.update(review_params)
+      flash[:notice] = 'review updated!'
+      redirect_to "/reviews/#{review.id}"
+    else
+      flash[:alert] = 'error. please try again'
+      render "/reviews/#{review.id}/edit"
+    end
+  end
+
+  def destroy
+    review = Review.find(params[:id])
+    if review.destroy
+      flash[:notice] = 'review destroyed'
+      redirect_to reviews_path
+    else
+      flash[:alert] = 'error. please try again'
+      render "/reviews/#{review.id}/edit"
+    end
+  end
+
+  def review_params
+    params.require(:review).permit(:product, :content)
+  end
+end

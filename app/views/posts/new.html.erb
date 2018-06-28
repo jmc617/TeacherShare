@@ -1,0 +1,13 @@
+<h1>Posts#new</h1>
+<p>Find me in app/views/posts/new.html.erb</p>
+
+<%= form_for [@group, @post] do |f| %>
+  <%= f.label :title%>
+  <%= f.text_field :title %>
+  <%= f.label :description%>
+  <%= f.text_area :description %>
+  <%= f.label :price%>
+  <%= f.text_field :price, placeholder: 'put 0 if free' %>
+  <%= hidden_field_tag(:group_id, :group_id) %>
+  <%= f.submit "create post"%>
+<%end%>

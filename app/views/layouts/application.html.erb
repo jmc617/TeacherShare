@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TBD</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+      <%= link_to 'reviews', reviews_path, class:"" %>
+    <% if teacher_signed_in? %>
+      <%= link_to 'groups', groups_path, class:"" %>
+      <%= link_to 'write review', new_review_path, class:"" %>
+      <%= link_to 'create group', new_group_path, class:"" %>
+      <%= link_to 'edit profile', edit_teacher_registration_path, class:"" %>
+      <%= link_to 'create group', new_group_path, class:"" %>
+      <%= link_to 'logout', destroy_teacher_session_path, method: :delete, class:"" %>
+    <% else %>
+      <%= link_to 'signup', new_teacher_registration_path, class:"" %>
+      <%= link_to 'login', new_teacher_session_path, class:"" %>
+    <% end %>
+
+    <% if teacher_signed_in? %>
+      <div class="">signed in as: <%= current_teacher.username %></div>
+    <%end%>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+    <%= yield %>
+  </body>
+</html>
