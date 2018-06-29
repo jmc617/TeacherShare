@@ -46,6 +46,11 @@
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+    <%= f.label :profile_picture %><br />
+    <%= f.file_field :avatar, multiple: false, direct_upload: true %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
