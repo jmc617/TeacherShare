@@ -16,8 +16,9 @@ class PostsController < ApplicationController
     post = group.posts.build(post_params)
     post.group_id = group.id
     post.teacher_id = current_teacher.id
+    post.images.attach(params[:post][:images])
 
-    if post.save!
+    if post.save
       flash[:notice] = 'post created!'
       redirect_to "/"
     else
@@ -34,8 +35,10 @@ class PostsController < ApplicationController
   def update
     @group = Group.find(params[:group_id])
     @post = Post.find(params[:id])
+    @post.images.attach(params[:post][:images])
 
     if @post.update(post_params)
+
       flash[:notice] = 'post updated!'
       redirect_to "/groups/#{@group.id}"
     else
@@ -56,6 +59,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:group_id, :title, :description, :price)
+    params.require(:post).permit(:group_id, :title, :description, :price, :images)
   end
 end

@@ -9,6 +9,10 @@
       <div><%= f.text_field :product %></div>
       <div>content</div>
       <div><%= f.text_area :content %></div>
+      <div class="field">
+        <%= f.label :upload_images %><br />
+        <%= f.file_field :images, multiple:true, direct_upload: true %>
+      </div>
       <div><%= f.submit "save changes"%></div>
       <%end%>
 

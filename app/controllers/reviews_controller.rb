@@ -1,7 +1,14 @@
 class ReviewsController < ApplicationController
   def index
-    if params[:q]
-      @reviews = Review.where('product LIKE ?', "%#{params[:q]}%")
+
+    if params[:q_group]
+      @groups = Group.where('name LIKE ?', "%#{params[:q_group]}%")
+    else
+      @groups = Group.all
+    end
+
+    if params[:q_review]
+      @reviews = Review.where('product LIKE ?', "%#{params[:q_review]}%")
     else
       @reviews = Review.all
     end
@@ -12,9 +19,11 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    review = Review.new(review_params)
-    review.teacher_id = current_teacher.id
-    if review.save
+    @review = Review.new(review_params)
+    @review.teacher_id = current_teacher.id
+    @review.pictures.attach(params[:review][:pictures])
+
+    if @review.save!
       flash[:notice] = 'review created!'
       redirect_to "/reviews"
     else
@@ -33,6 +42,8 @@ class ReviewsController < ApplicationController
 
   def update
     review = Review.find(params[:id])
+    review.images.attach(params[:post][:images])
+
     if review.update(review_params)
       flash[:notice] = 'review updated!'
       redirect_to "/reviews/#{review.id}"
@@ -44,6 +55,7 @@ class ReviewsController < ApplicationController
 
   def destroy
     review = Review.find(params[:id])
+
     if review.destroy
       flash[:notice] = 'review destroyed'
       redirect_to reviews_path
@@ -54,6 +66,6 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:product, :content)
+    params.require(:review).permit(:product, :content, :pictures)
   end
 end

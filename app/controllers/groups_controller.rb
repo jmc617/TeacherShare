@@ -9,8 +9,10 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @membership = Membership.new
-    @membership_cancel = Membership.find_by group_id: params[:id], teacher_id: current_teacher.id
+    if teacher_signed_in?
+      @membership = Membership.new
+      @membership_cancel = Membership.find_by group_id: params[:id], teacher_id: current_teacher.id
+    end
     if params[:q_posts]
       @posts = Post.where('title LIKE ?', "%#{params[:q_posts]}%")
     else
@@ -31,9 +33,11 @@ class GroupsController < ApplicationController
   def create
     group = Group.new(group_params)
     group.teacher_id = current_teacher.id
+    group.pictures.attach(params[:group][:pictures])
+
     if group.save
       flash[:notice] = 'group created!'
-      redirect_to "/groups"
+      redirect_to "/"
     else
       flash[:alert] = 'error. please try again'
       render "/groups/new"
@@ -67,6 +71,6 @@ class GroupsController < ApplicationController
   end
 
   def group_params
-    params.require(:group).permit(:name, :description)
+    params.require(:group).permit(:name, :description, :pictures)
   end
 end

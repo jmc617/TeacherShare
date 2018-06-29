@@ -8,5 +8,10 @@
     <%= f.label :content %>
     <%= f.text_field :content %>
 
+    <div class="field">
+      <%= f.label :upload_images %><br />
+      <%= f.file_field :pictures, multiple:true, direct_upload: true %>
+    </div>
+
     <%= f.submit "create review"%>
     <%end%>

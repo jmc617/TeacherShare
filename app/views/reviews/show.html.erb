@@ -1,6 +1,9 @@
 <h1>Reviews#show</h1>
 <p>Find me in app/views/reviews/show.html.erb</p>
 
+<% @review.pictures.each do |i| %>
+<%= image_tag i %>
+<%end%>
 <div><%= @review.product %></div>
 <p><%= @review.content %></p>
 <%= link_to "Edit review", "/reviews/#{@review.id}/edit", class:"" %>

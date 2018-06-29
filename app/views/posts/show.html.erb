@@ -1,6 +1,9 @@
 <h1>Posts#show</h1>
 <p>Find me in app/views/posts/show.html.erb</p>
 
+<% @post.images.each do |i| %>
+<%= image_tag i %>
+<%end%>
 <div><%= @post.description%></div>
 <div>$<%= @post.price%></div>
 <%= link_to "edit post", "/groups/#{@post.group_id}/posts/#{@post.id}/edit", class:"" %>
