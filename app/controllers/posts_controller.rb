@@ -3,7 +3,9 @@ class PostsController < ApplicationController
   end
 
   def show
+    @group = Group.find(params[:group_id])
     @post = Post.find(params[:id])
+    @post_comment = PostComment.new
   end
 
   def new

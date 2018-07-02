@@ -34,6 +34,7 @@ class ReviewsController < ApplicationController
 
   def show
     @review = Review.find(params[:id])
+    @review_comment = ReviewComment.new
   end
 
   def edit
@@ -42,7 +43,7 @@ class ReviewsController < ApplicationController
 
   def update
     review = Review.find(params[:id])
-    review.images.attach(params[:post][:images])
+    review.pictures.attach(params[:review][:images])
 
     if review.update(review_params)
       flash[:notice] = 'review updated!'

@@ -1,2 +1,9 @@
-<h1>ReviewComments#edit</h1>
-<p>Find me in app/views/review_comments/edit.html.erb</p>
+
+<%= form_for [@review, @review_comment] do |f| %>
+    <div>Content</div>
+    <div><%= f.text_area :content %></div>
+    <div><%= f.submit "publish changes"%></div>
+<%end%>
+
+<%= link_to 'Delete', review_review_comment_path(@review_comment), method: :delete,
+                         data: { confirm: 'Are you sure?' } %>

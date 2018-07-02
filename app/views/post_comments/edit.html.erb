@@ -1,2 +1,9 @@
-<h1>PostComments#edit</h1>
-<p>Find me in app/views/post_comments/edit.html.erb</p>
+
+<%= form_for [@group, @post, @post_comment] do |f| %>
+    <div>Content</div>
+    <div><%= f.text_area :content %></div>
+    <div><%= f.submit "publish changes"%></div>
+<%end%>
+
+<%= link_to 'Delete', group_post_post_comment_path(@post_comment), method: :delete,
+                         data: { confirm: 'Are you sure?' } %>

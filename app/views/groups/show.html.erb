@@ -5,9 +5,9 @@
   <% if teacher_signed_in? && @group.teacher_id == current_teacher.id %>
     <%= link_to "Edit Group", "/groups/#{@group.id}/edit", class:"" %>
     <%else%>
-    <div>Created by:
+    <h4>Created by:
       <%= link_to "#{Teacher.find(@group.teacher_id).username}", "/teachers/#{Teacher.find(@group.teacher_id).id}", class:"" %>
-    </div>
+    </h4>
   <%end%>
 
   <p><%= @group.description %></p>
@@ -30,7 +30,8 @@
   <%= submit_tag "search", name: nil %>
 <% end %>
 
-<div class="">members:
+<div class="">
+  <h3>members:</h3>
   <% @teachers.each do |t| %>
     <%= link_to "#{t.username}", "/teachers/#{t.id}", class:"" %>
   <% end %>
@@ -50,6 +51,7 @@
 </div>
 <%end%>
 
+<h3>Posts:</h3>
 <% @posts.each do |o| %>
   <%= link_to "#{o.title}", "/groups/#{@group.id}/posts/#{o.id}", class:"" %>
   <div><%= o.description%></div>

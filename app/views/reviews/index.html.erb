@@ -5,7 +5,7 @@
     <%= text_field_tag(:q_review) %>
     <%= submit_tag "Search", name: nil %>
   <% end %>
-
+  <h3>recent reviews</h3>
   <% @reviews.reverse.take(5).each do |r| %>
     <div>
       <% if r.pictures[0] != nil %>
@@ -21,10 +21,15 @@
 <div class="">
   <% if teacher_signed_in? %>
   <div>
-    <div>your groups:</div>
+    <h3>groups you are a member of:</h3>
       <% current_teacher.groups.each do |g|%>
         <div><%= link_to "#{g.name}", "/groups/#{g.id}", class:"" %></div>
       <%end%>
+    <h3>groups you created:</h3>
+      <% Group.where("teacher_id = #{current_teacher.id}").each do |g|%>
+        <div><%= link_to "#{g.name}", "/groups/#{g.id}", class:"" %></div>
+      <%end%>
+      <hr>
   </div>
   <%end%>
   <%= form_tag("/reviews", method: "get") do %>
@@ -32,7 +37,7 @@
     <%= text_field_tag(:q_group) %>
     <%= submit_tag "Search", name: nil %>
   <% end %>
-  <div>all groups:</div>
+  <h3>all groups:</h3>
   <% @groups.reverse.take(10).each do |g| %>
     <%= link_to "#{g.name}", "/groups/#{g.id}", class:"" %>
     <div><%= g.description %></div>
