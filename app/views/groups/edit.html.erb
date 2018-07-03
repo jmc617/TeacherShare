@@ -1,17 +1,23 @@
-<h1>Groups#edit</h1>
-<p>Find me in app/views/groups/edit.html.erb</p>
 
 <div class='card'>
-  <h2>edit group</h2>
 
-  <%= form_for @group do |f| %>
+  <% if teacher_signed_in? && @group.teacher_id == current_teacher.id %>
+    <h2>edit group</h2>
+    <%= form_for @group do |f| %>
       <div>Name</div>
       <div><%= f.text_field :name %></div>
       <div>Description</div>
       <div><%= f.text_area :description %></div>
+      <div class="field">
+        <%= f.label :group_images %><br />
+        <%= f.file_field :pictures, multiple:true, direct_upload: true %>
+      </div>
       <div><%= f.submit "save changes"%></div>
       <%end%>
 
   <%= link_to 'Delete', group_path(@group), method: :delete, data:
   { confirm: 'Are you sure? This will delete all posts in the group.' } %>
+  <% else %>
+    <h2>Sorry! Only the creators of groups are allowed to edit them.</h2>
+  <% end %>
 </div>

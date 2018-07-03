@@ -1,0 +1,16 @@
+<% if @review_comment.teacher_id == current_teacher.id %>
+
+<%= form_for [@review, @review_comment] do |f| %>
+    <div>Content</div>
+    <div><%= f.text_area :content %></div>
+    <div><%= f.submit "publish changes"%></div>
+<%end%>
+
+<%= link_to 'Delete', review_review_comment_path(@review_comment), method: :delete,
+                         data: { confirm: 'Are you sure?' } %>
+
+<%else %>
+
+  <h2>Sorry! You must be the owner of the comment to edit.</h2>
+
+<% end %>

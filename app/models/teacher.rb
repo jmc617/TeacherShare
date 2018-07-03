@@ -1,6 +1,9 @@
 class Teacher < ApplicationRecord
+  has_one_attached :avatar
   has_many :groups
   has_many :reviews, dependent: :destroy
+  has_many :review_comments, dependent: :destroy
+  has_many :post_comments, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :memberships, dependent: :destroy
   has_many :groups, :through => :memberships

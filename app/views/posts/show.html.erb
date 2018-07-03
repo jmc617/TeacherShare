@@ -1,6 +1,40 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+
+<% @post.images.each do |i| %>
+  <%= image_tag i %>
+<%end%>
 
 <div><%= @post.description%></div>
-<div>$<%= @post.price%></div>
-<%= link_to "edit post", "/groups/#{@post.group_id}/posts/#{@post.id}/edit", class:"" %>
+
+<% if @post.price == 0 %>
+  <div id='free-post'>FREE</div>
+<% else %>
+  <div>$<%= @post.price%></div>
+<% end %>
+
+<div class="">Posted in: <%=Group.find(@post.group_id).name%></div>
+<a href="/teachers/<%= @post.teacher_id %>">Posted by:<%= Teacher.find(@post.teacher_id).username %></a>
+
+Comments:
+<% @post.post_comments.each do |c| %>
+  <div><%= c.content %>/<%= Teacher.find(c.teacher_id).username %></div>
+
+  <% if c.teacher_id == current_teacher.id %>
+    <%= link_to "edit comment", "/groups/#{@group.id}/posts/#{@post.id}/post_comments/#{c.id}/edit", class:"" %>
+  <%end%>
+  <hr>
+
+<% if @post.teacher_id == current_teacher.id %>
+  <%= link_to "edit post", "/groups/#{@post.group_id}/posts/#{@post.id}/edit", class:"" %>
+<% end %>
+
+<% if @membership != nil%>
+    <div class=''>
+      <%= form_for [@group, @post, @post_comment] do |f| %>
+          comment:<%= f.text_field :content %>
+          <%= f.submit id: ""  "post comment"%>
+      <%end%>
+    </div>
+
+    <div class="comment-btns">JS comment button</div>
+  <% end %>
+<% end %>

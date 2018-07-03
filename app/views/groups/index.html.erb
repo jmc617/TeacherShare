@@ -16,8 +16,8 @@
 <%end%>
 <hr>
 <div>
-  <div>all groups:</div>
-  <% @groups.each do |g| %>
+  <div>new groups:</div>
+  <% @groups.reverse.take(10).each do |g| %>
     <%= link_to "#{g.name}", "/groups/#{g.id}", class:"" %>
     <div><%= g.description %></div>
   <% end %>

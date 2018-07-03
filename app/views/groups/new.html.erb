@@ -1,12 +1,17 @@
-<h1>Groups#new</h1>
-<p>Find me in app/views/groups/new.html.erb</p>
 
-<%= form_for @group do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+<% if teacher_signed_in? %>
+  <%= form_for @group do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
 
-    <%= f.label :description %>
-    <%= f.text_area  :description %>
-
-    <%= f.submit "create group"%>
-    <%end%>
+      <%= f.label :description %>
+      <%= f.text_area  :description %>
+      <div class="field">
+        <%= f.label :group_images %><br />
+        <%= f.file_field :pictures, multiple:true, direct_upload: true %>
+      </div>
+      <%= f.submit "create group"%>
+      <%end%>
+<% else %>
+  <h2>Sorry! You must be signed in to create a group</h2>
+<% end %>

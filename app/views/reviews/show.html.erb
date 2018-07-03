@@ -1,6 +1,30 @@
-<h1>Reviews#show</h1>
-<p>Find me in app/views/reviews/show.html.erb</p>
 
+<% @review.pictures.each do |i| %>
+<%= image_tag i %>
+<%end%>
 <div><%= @review.product %></div>
-<p><%= @review.content %></p>
-<%= link_to "Edit review", "/reviews/#{@review.id}/edit", class:"" %>
+<div><%= @review.content %></div>
+<a href="/teachers/<%= @review.teacher_id %>"><%= @review.teacher_id %></a> 
+
+
+
+<% @review.review_comments.each do |c| %>
+<%= c.content %>
+<a href="/teachers/<%= c.teacher_id %>"><%= Teacher.find(c.teacher_id).username%></a>
+  <% if c.teacher_id == current_teacher.id %>
+    <%= link_to "edit", "/reviews/#{@review.id}/review_comments/#{c.id}/edit", class:"" %>
+  <% end %>
+<%end%>
+
+<% if teacher_signed_in? %>
+<div class="comment-btns">click to comment</div>
+    <div class=''>
+      <%= form_for [@review, @review_comment] do |f| %>
+          comment:<%= f.text_field :content %>
+          <%= f.submit id: ""  "post comment"%>
+      <%end%>
+    </div>
+    <% if @review.teacher_id == current_teacher.id %>
+      <%= link_to "Edit review", "/reviews/#{@review.id}/edit", class:"" %>
+    <% end %>
+<% end %>

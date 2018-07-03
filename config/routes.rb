@@ -2,11 +2,27 @@ Rails.application.routes.draw do
 
   root "reviews#index"
 
-  resources :reviews
-  resources :memberships
-  resources :groups do
-    resources :posts
+  delete "/reviews/:review_id/delete_picture_attachment/:index", to: 'reviews#delete_picture_attachment'
+
+  delete "/posts/:post_id/delete_image_attachment/:index", to: 'posts#delete_image_attachment'
+
+  resources :reviews do
+    resources :review_comments
   end
-  devise_for :teachers
+
+  resources :memberships
+
+  resources :groups do
+    resources :posts do
+      resources :post_comments
+    end
+  end
+
+  devise_for :teachers, controllers: { registrations: 'teachers/registrations' }
+
+  resources :teachers
+
+  delete "/teachers/:id/delete_avatar", to: "teachers#delete_avatar"
+
 
 end
