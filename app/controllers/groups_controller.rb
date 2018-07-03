@@ -33,7 +33,10 @@ class GroupsController < ApplicationController
   def create
     group = Group.new(group_params)
     group.teacher_id = current_teacher.id
-    group.pictures.attach(params[:group][:pictures])
+
+    if params[:pictures] != nil
+      group.pictures.attach(params[:group][:pictures])
+    end
 
     if group.save
       flash[:notice] = 'group created!'

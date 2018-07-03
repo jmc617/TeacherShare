@@ -4,6 +4,8 @@ class TeachersController < ApplicationController
 
   def show
     @teacher = Teacher.find(params[:id])
+    @posts = Post.where(teacher_id: params[:id])
+    @reviews = Review.where(teacher_id: params[:id])
   end
 
   def delete_avatar

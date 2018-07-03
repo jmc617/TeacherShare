@@ -3,11 +3,14 @@
 <%= image_tag i %>
 <%end%>
 <div><%= @review.product %></div>
-<p><%= @review.content %></p>
+<div><%= @review.content %></div>
+<a href="/teachers/<%= @review.teacher_id %>"><%= @review.teacher_id %></a> 
+
+
 
 <% @review.review_comments.each do |c| %>
 <%= c.content %>
-<%= Teacher.find(c.teacher_id).username%>
+<a href="/teachers/<%= c.teacher_id %>"><%= Teacher.find(c.teacher_id).username%></a>
   <% if c.teacher_id == current_teacher.id %>
     <%= link_to "edit", "/reviews/#{@review.id}/review_comments/#{c.id}/edit", class:"" %>
   <% end %>

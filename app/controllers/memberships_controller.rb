@@ -10,7 +10,7 @@ class MembershipsController < ApplicationController
 
     if membership.save!
       flash[:notice] = 'group joined!'
-      redirect_to "/groups"
+      redirect_to "/groups/#{group.id}"
     else
       flash[:alert] = 'error. please try again'
       redirect_to "/groups/#{group.id}"

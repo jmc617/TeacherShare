@@ -1,5 +1,8 @@
 <div id='groups-show-wrapper'>
   <div id='group-info'>
+  <% @group.pictures.each do |i| %>
+    <%= image_tag i %>
+  <%end%>
   <h1><%= @group.name %></h1>
 
   <% if teacher_signed_in? && @group.teacher_id == current_teacher.id %>
@@ -58,6 +61,9 @@
   <%= link_to "#{o.title}", "/groups/#{@group.id}/posts/#{o.id}", class:"" %>
   <div><%= o.description%></div>
   <div>$<%= o.price%></div>
+  <% if o.images[0] != nil %>
+    <div><%= image_tag o.images[0] %></div>
+  <% end %>
 <% end %>
 </div>
 </div>

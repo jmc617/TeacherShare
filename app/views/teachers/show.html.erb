@@ -1,11 +1,26 @@
 
-<%= image_tag @teacher.avatar %>
+<% if @teacher.avatar = nil %>
+  <%= image_tag @teacher.avatar %>
+<% end %>
 
 <%= @teacher.username %>
 <%= @teacher.email %>
 <%= @teacher.location %>
 <%= @teacher.aboutMe %>
 
+<h3>products reviewed:</h3>
+<% @reviews.reverse.each do |r| %>
+  <%= link_to "#{r.product}", "/reviews/#{r.id}", class:"" %>
+<% end %>
+
 <% if @teacher.id == current_teacher.id %>
+  <% if @posts != nil %>
+  <h3>posts</h3>
+  <% @posts.reverse.each do |o| %>
+
+    <%= link_to "#{o.title}-#{Group.find(o.group_id).name}", "/groups/#{o.group_id}/posts/#{o.id}", class:"" %>
+
+  <% end %>
+  <% end %>
   <%= link_to 'edit profile', edit_teacher_registration_path, class:"" %>
 <% end %>

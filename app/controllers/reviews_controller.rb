@@ -21,7 +21,10 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @review.teacher_id = current_teacher.id
-    @review.pictures.attach(params[:review][:pictures])
+
+    if params[:pictures] != nil
+      @review.pictures.attach(params[:review][:pictures])
+    end
 
     if @review.save!
       flash[:notice] = 'review created!'

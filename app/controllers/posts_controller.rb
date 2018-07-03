@@ -6,13 +6,13 @@ class PostsController < ApplicationController
     @group = Group.find(params[:group_id])
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
-    @membership = Membership.find_by group_id: params[:group_id], teacher_id: current_teacher.id
+    @membership = Membership.find_by(group_id: params[:group_id], teacher_id: current_teacher.id)
   end
 
   def new
     @group = Group.find(params[:group_id])
     @post = Post.new
-    @membership = Membership.find_by group_id: params[:group_id], teacher_id:
+    @membership = Membership.find_by(group_id: params[:group_id], teacher_id: current_teacher.id)
   end
 
   def create
@@ -20,9 +20,12 @@ class PostsController < ApplicationController
     post = group.posts.build(post_params)
     post.group_id = group.id
     post.teacher_id = current_teacher.id
-    post.images.attach(params[:post][:images])
 
-    if post.save
+    if params[:images] != nil
+      post.images.attach(params[:post][:images])
+    end
+    
+    if post.save!
       flash[:notice] = 'post created!'
       redirect_to "/"
     else

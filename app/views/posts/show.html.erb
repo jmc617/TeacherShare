@@ -4,7 +4,15 @@
 <%end%>
 
 <div><%= @post.description%></div>
-<div>$<%= @post.price%></div>
+
+<% if @post.price == 0 %>
+  <div id='free-post'>FREE</div>
+<% else %>
+  <div>$<%= @post.price%></div>
+<% end %>
+
+<div class="">Posted in: <%=Group.find(@post.group_id).name%></div>
+<a href="/teachers/<%= @post.teacher_id %>">Posted by:<%= Teacher.find(@post.teacher_id).username %></a>
 
 Comments:
 <% @post.post_comments.each do |c| %>
