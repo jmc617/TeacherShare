@@ -1,8 +1,15 @@
-<h1>Reviews#edit</h1>
-<p>Find me in app/views/reviews/edit.html.erb</p>
+<% if @review.teacher_id == current_teacher.id %>
 
 <div class='card'>
   <h2>edit review</h2>
+
+  <% @review.pictures.each_with_index do |ph, i| %>
+  <%= image_tag ph %>
+  <%= link_to 'Remove', "/reviews/#{@review.id}/delete_picture_attachment/#{i}",
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+  <%end%>
+
 
   <%= form_for @review do |f| %>
       <div>product</div>
@@ -19,3 +26,7 @@
   <%= link_to 'Delete', review_path(@review), method: :delete, data:
   { confirm: 'Are you sure?' } %>
 </div>
+
+<% else %>
+
+<h2>Sorry! You must be the owner of the review to edit</h2>

@@ -13,7 +13,6 @@
   <body>
   <%= link_to 'site_name', reviews_path, class:"" %>
     <% if teacher_signed_in? %>
-      <%= link_to 'groups', groups_path, class:"" %>
       <%= link_to 'write review', new_review_path, class:"" %>
       <%= link_to 'create group', new_group_path, class:"" %>
       <%= link_to 'edit profile', edit_teacher_registration_path, class:"" %>

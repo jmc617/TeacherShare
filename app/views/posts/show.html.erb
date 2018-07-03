@@ -1,20 +1,25 @@
 
 <% @post.images.each do |i| %>
-<%= image_tag i %>
-
+  <%= image_tag i %>
 <%end%>
+
 <div><%= @post.description%></div>
 <div>$<%= @post.price%></div>
+
 Comments:
 <% @post.post_comments.each do |c| %>
-<div><%= c.content %>
-/<%= Teacher.find(c.teacher_id).username %></div>
-<%= link_to "edit comment", "/groups/#{@group.id}/posts/#{@post.id}/post_comments/#{c.id}/edit", class:"" %>
-<%end%>
-<hr>
-<%= link_to "edit post", "/groups/#{@post.group_id}/posts/#{@post.id}/edit", class:"" %>
+  <div><%= c.content %>/<%= Teacher.find(c.teacher_id).username %></div>
 
+  <% if c.teacher_id == current_teacher.id %>
+    <%= link_to "edit comment", "/groups/#{@group.id}/posts/#{@post.id}/post_comments/#{c.id}/edit", class:"" %>
+  <%end%>
+  <hr>
 
+<% if @post.teacher_id == current_teacher.id %>
+  <%= link_to "edit post", "/groups/#{@post.group_id}/posts/#{@post.id}/edit", class:"" %>
+<% end %>
+
+<% if @membership != nil%>
     <div class=''>
       <%= form_for [@group, @post, @post_comment] do |f| %>
           comment:<%= f.text_field :content %>
@@ -23,3 +28,5 @@ Comments:
     </div>
 
     <div class="comment-btns">JS comment button</div>
+  <% end %>
+<% end %>

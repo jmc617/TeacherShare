@@ -1,8 +1,11 @@
 
 <%= image_tag @teacher.avatar %>
 
-
-
-
 <%= @teacher.username %>
 <%= @teacher.email %>
+<%= @teacher.location %>
+<%= @teacher.aboutMe %>
+
+<% if @teacher.id == current_teacher.id %>
+  <%= link_to 'edit profile', edit_teacher_registration_path, class:"" %>
+<% end %>

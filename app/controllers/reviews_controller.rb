@@ -47,7 +47,7 @@ class ReviewsController < ApplicationController
 
     if review.update(review_params)
       flash[:notice] = 'review updated!'
-      redirect_to "/reviews/#{review.id}"
+      redirect_to "/reviews/#{review.id}/edit"
     else
       flash[:alert] = 'error. please try again'
       render "/reviews/#{review.id}/edit"
@@ -63,6 +63,19 @@ class ReviewsController < ApplicationController
     else
       flash[:alert] = 'error. please try again'
       render "/reviews/#{review.id}/edit"
+    end
+  end
+
+  def delete_picture_attachment
+    @review = Review.find(params[:review_id])
+    @selected_picture = @review.pictures[params[:index].to_i]
+
+    if @selected_picture.purge
+      flash[:notice] = 'image removed'
+      redirect_to "/reviews/#{@review.id}/edit"
+    else
+      flash[:alert] = 'error. please try again'
+      render "/reviews"
     end
   end
 

@@ -1,5 +1,14 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<h2>edit post</h2>
+
+<% if @post.teacher_id == current_teacher.id %>
+
+<% @post.images.each_with_index do |ph, i| %>
+<%= image_tag ph %>
+<%= link_to 'Remove', "/posts/#{@post.id}/delete_image_attachment/#{i}",
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+<%end%>
+
 
 <%= form_for [@group, @post] do |f| %>
     <div>Title</div>
@@ -10,10 +19,15 @@
     <div><%= f.text_field :price %></div>
     <div class="field">
       <%= f.label :upload_images %><br />
-      <%= f.file_field :image, multiple:true, direct_upload: true %>
+      <%= f.file_field :images, multiple:true, direct_upload: true %>
     </div>
     <div><%= f.submit "publish changes"%></div>
 <%end%>
 
 <%= link_to 'Delete', group_post_path(@post), method: :delete,
                          data: { confirm: 'Are you sure?' } %>
+<% else %>
+
+  <h2>Sorry, you have to be the owner of the post to edit.</h2>
+
+<% end %>

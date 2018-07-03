@@ -12,7 +12,7 @@ class Teachers::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   # def create
   #   super do |resource|
-  #     teacher.avatars.attach(params[:teacher][:avatar])
+  #     teacher.avatar.attach(params[:teacher][:avatar])
   #   end
   # end
 
@@ -23,13 +23,17 @@ class Teachers::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   # def update
-  #   super
+  #   super do |resource|
+  #     teacher.avatar.attach(params[:teacher][:avatar])
+  #   end
   # end
 
   # DELETE /resource
   # def destroy
   #   super
   # end
+
+  
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign

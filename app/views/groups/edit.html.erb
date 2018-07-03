@@ -1,8 +1,9 @@
 
 <div class='card'>
-  <h2>edit group</h2>
 
-  <%= form_for @group do |f| %>
+  <% if teacher_signed_in? && @group.teacher_id == current_teacher.id %>
+    <h2>edit group</h2>
+    <%= form_for @group do |f| %>
       <div>Name</div>
       <div><%= f.text_field :name %></div>
       <div>Description</div>
@@ -16,4 +17,7 @@
 
   <%= link_to 'Delete', group_path(@group), method: :delete, data:
   { confirm: 'Are you sure? This will delete all posts in the group.' } %>
+  <% else %>
+    <h2>Sorry! Only the creators of groups are allowed to edit them.</h2>
+  <% end %>
 </div>

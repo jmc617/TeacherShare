@@ -49,6 +49,8 @@
 <div>
   <%= link_to "create post in #{@group.name}", "/groups/#{@group.id}/posts/new", class:"" %>
 </div>
+<% else %>
+ <div>join group to create and respond to posts!</div>
 <%end%>
 
 <h3>Posts:</h3>

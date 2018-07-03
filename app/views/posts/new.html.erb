@@ -1,5 +1,5 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+
+<% if @membership != nil %>
 
 <%= form_for [@group, @post] do |f| %>
   <%= f.label :title%>
@@ -15,3 +15,9 @@
   <%= hidden_field_tag(:group_id, :group_id) %>
   <%= f.submit "create post"%>
 <%end%>
+
+<% else %>
+
+<h2> Sorry! Must be a member of this group to create posts. </h2>
+
+<% end %>
