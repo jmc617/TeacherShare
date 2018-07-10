@@ -12,7 +12,7 @@
   <h1><%= @group.name %></h1>
 
   <% if teacher_signed_in? && @group.teacher_id == current_teacher.id %>
-    <%= link_to "Edit Group", "/groups/#{@group.id}/edit", class:"" %>
+    <%= link_to "Edit Group", "/groups/#{@group.id}/edit", class:"btn btn-primary" %>
     <%else%>
     <h4>Created by:
       <%= link_to "#{Teacher.find(@group.teacher_id).username}", "/teachers/#{Teacher.find(@group.teacher_id).id}", class:"" %>
@@ -23,11 +23,11 @@
 
   <% if teacher_signed_in? %>
   <% if @membership_cancel != nil%>
-    <%= link_to 'leave group', membership_path(@membership_cancel), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to 'leave group', membership_path(@membership_cancel), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
   <% else %>
     <%= form_for @membership do |f| %>
       <%= hidden_field_tag(:group_id, @group.id) %>
-      <%= f.submit "join group"%>
+      <%= f.submit "join group", class: "btn btn-primary"%>
     <%end%>
   <%end%>
   <%end%>
@@ -38,7 +38,7 @@
 <%= form_tag("/groups/#{@group.id}", method: "get") do %>
   <%= label_tag(:q_members, "search members") %>
   <%= text_field_tag(:q_members) %>
-  <%= submit_tag "search", name: nil %>
+  <%= submit_tag "search", class:"btn btn-primary", name: nil %>
 <% end %>
 
 <div class="">
@@ -53,12 +53,12 @@
 <%= form_tag("/groups/#{@group.id}", method: "get") do %>
   <%= label_tag(:q_posts, "search posts") %>
   <%= text_field_tag(:q_posts) %>
-  <%= submit_tag "search", name: nil %>
+  <%= submit_tag "search", class: "btn btn-primary", name: nil %>
 <% end %>
 
 <% if teacher_signed_in? && @membership_cancel != nil%>
 <div>
-  <%= link_to "create post in #{@group.name}", "/groups/#{@group.id}/posts/new", class:"" %>
+  <%= link_to "create post in #{@group.name}", "/groups/#{@group.id}/posts/new", class: "btn btn-primary" %>
 </div>
 <% else %>
  <div>join group to create and respond to posts!</div>

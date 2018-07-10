@@ -5,7 +5,7 @@
   <div class="">search reviews</div>
   <%= form_tag("/reviews", method: "get") do %>
     <%= text_field_tag(:q_review)%>
-    <%= submit_tag "Search", name: nil %>
+    <%= submit_tag "Search", class: "btn btn-primary", name: nil %>
   <% end %>
 
   <% @reviews.reverse.take(5).each do |r| %>
@@ -41,7 +41,7 @@
   </div>
   <%= form_tag("/reviews", method: "get") do %>
     <%= text_field_tag(:q_group) %>
-    <%= submit_tag "Search", name: nil %>
+    <%= submit_tag "Search", class: "btn btn-primary", name: nil %>
   <% end %>
   <% @groups.reverse.take(10).each do |g| %>
     <div><%= link_to "#{g.name}", "/groups/#{g.id}", class:"" %></div>
