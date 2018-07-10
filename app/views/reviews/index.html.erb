@@ -1,18 +1,20 @@
+
 <div id='review-index-wrapper'>
 <div>
+  <h3>recent reviews</h3>
+  <div class="">search reviews</div>
   <%= form_tag("/reviews", method: "get") do %>
-    <%= label_tag(:q_review, "Search reviews") %>
-    <%= text_field_tag(:q_review) %>
+    <%= text_field_tag(:q_review)%>
     <%= submit_tag "Search", name: nil %>
   <% end %>
-  <h3>recent reviews</h3>
+
   <% @reviews.reverse.take(5).each do |r| %>
-    <div>
+    <div class='card text-center'>
       <% if r.pictures[0] != nil %>
         <div><%= image_tag r.pictures[0] %></div>
       <% end %>
       <%= link_to "#{r.product}", "/reviews/#{r.id}", class:"" %>
-      Written by: <a href="/teachers/r.teacher_id"><%= Teacher.find(r.teacher_id).username %></a> 
+      Written by: <a href="/teachers/<%=r.teacher_id%>"><%= Teacher.find(r.teacher_id).username %></a>
 
     </div>
   <% end %>
@@ -21,26 +23,28 @@
 <div class="">
   <% if teacher_signed_in? %>
   <div>
-    <h3>groups you are a member of:</h3>
+    <h3>your groups</h3>
       <% current_teacher.groups.each do |g|%>
         <div><%= link_to "#{g.name}", "/groups/#{g.id}", class:"" %></div>
       <%end%>
-    <h3>groups you created:</h3>
+    <!-- <h3>groups you created:</h3>
       <% Group.where("teacher_id = #{current_teacher.id}").each do |g|%>
         <div><%= link_to "#{g.name}", "/groups/#{g.id}", class:"" %></div>
-      <%end%>
+      <%end%> -->
       <hr>
   </div>
   <%end%>
+
+  <h3>all groups</h3>
+  <div class="">
+    search groups
+  </div>
   <%= form_tag("/reviews", method: "get") do %>
-    <%= label_tag(:q_group, "search groups") %>
     <%= text_field_tag(:q_group) %>
     <%= submit_tag "Search", name: nil %>
   <% end %>
-  <h3>all groups:</h3>
   <% @groups.reverse.take(10).each do |g| %>
-    <%= link_to "#{g.name}", "/groups/#{g.id}", class:"" %>
-    <div><%= g.description %></div>
+    <div><%= link_to "#{g.name}", "/groups/#{g.id}", class:"" %></div>
   <% end %>
 </div>
 </div>

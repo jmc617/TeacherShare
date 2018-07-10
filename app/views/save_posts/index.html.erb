@@ -1,0 +1,21 @@
+<div class='card text-center card-background saved'>
+  <div class='inner-card-background'>
+    <h2>saved posts</h2>
+  </div>
+
+<% @save_posts.reverse.each do |s| %>
+<div class='card text-center card-background saved'>
+  <div class='inner-card-background'>
+  <% post = Post.find(s.post_id) %>
+  <% if post.images[0] != nil %>
+    <div><%= image_tag post.images[0] %></div>
+    <hr>
+  <% end %>
+
+    <h4><%= link_to "#{post.title}", "/groups/#{post.group_id}/posts/#{post.id}", class:"" %></h4>
+    <div>
+    <%= link_to 'delete', "/save_posts/#{s.id}", method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+  </div>
+</div>
+<% end %>

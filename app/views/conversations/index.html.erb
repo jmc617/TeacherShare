@@ -1,0 +1,23 @@
+
+<div id='conversation-container'>
+<h1 id='conversation-title'>mailbox</h1>
+<div class='card msg-card1'>
+<h2>conversations</h2>
+  <% @conversations.each do |conversation| %>
+  <div class='card convers-link'>
+    <%= link_to conversation.recipient(current_teacher).username, conversation_messages_path(conversation) %>
+    <% if !conversation.unread_message_count(current_teacher).zero? %>
+      <div id='new-msg-count'>(<%= conversation.unread_message_count(current_teacher) %>)</div>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+
+<div class='card msg-card2'>
+<h2>teachers</h2>
+  <% @teachers.each do |teacher| %>
+    <div><%= link_to teacher.username, conversations_path(sender_id: current_teacher.id, receiver_id: teacher.id), method: :post %></div>
+  <% end %>
+</div>
+
+</div>

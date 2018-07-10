@@ -1,5 +1,11 @@
-<div id='groups-show-wrapper'>
+<div id="groups-show-wrapper" >
+
+
   <div id='group-info'>
+    <div class="card text-center card-background">
+
+    <div class="inner-card-background">
+
   <% @group.pictures.each do |i| %>
     <%= image_tag i %>
   <%end%>
@@ -25,6 +31,8 @@
     <%end%>
   <%end%>
   <%end%>
+</div>
+</div>
   </div>
 <div id='members-list'>
 <%= form_tag("/groups/#{@group.id}", method: "get") do %>
@@ -34,14 +42,14 @@
 <% end %>
 
 <div class="">
-  <h3>members:</h3>
+  <h3>members(<%=@group.memberships.count%>):</h3>
   <% @teachers.each do |t| %>
     <%= link_to "#{t.username}", "/teachers/#{t.id}", class:"" %>
   <% end %>
 </div>
 </div>
 
-<div id='post-list'>
+<div id='post-list' class="text-center">
 <%= form_tag("/groups/#{@group.id}", method: "get") do %>
   <%= label_tag(:q_posts, "search posts") %>
   <%= text_field_tag(:q_posts) %>
@@ -57,13 +65,18 @@
 <%end%>
 
 <h3>Posts:</h3>
-<% @posts.each do |o| %>
-  <%= link_to "#{o.title}", "/groups/#{@group.id}/posts/#{o.id}", class:"" %>
-  <div><%= o.description%></div>
-  <div>$<%= o.price%></div>
+<% @posts.reverse.take(5).each do |o| %>
+ <div class='card'>
   <% if o.images[0] != nil %>
     <div><%= image_tag o.images[0] %></div>
   <% end %>
-<% end %>
+  <%= link_to "#{o.title}", "/groups/#{@group.id}/posts/#{o.id}", class:"" %>
+  <div><%= o.description%></div>
+  <% if o.price == 0 %>
+    <div class='free-post'>FREE</div>
+  <% else %>
+    <div>$<%= o.price%></div>
+  <% end %>
 </div>
+<% end %>
 </div>

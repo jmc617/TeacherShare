@@ -1,11 +1,13 @@
-
+<div class='card text-center card-background'>
+<div class='inner-card-background'>
 <% if teacher_signed_in? %>
+
   <%= form_for @group do |f| %>
       <%= f.label :name %>
-      <%= f.text_field :name %>
+      <div><%= f.text_field :name %></div>
 
       <%= f.label :description %>
-      <%= f.text_area  :description %>
+      <div><%= f.text_area  :description %></div>
       <div class="field">
         <%= f.label :group_images %><br />
         <%= f.file_field :pictures, multiple:true, direct_upload: true %>
@@ -15,3 +17,5 @@
 <% else %>
   <h2>Sorry! You must be signed in to create a group</h2>
 <% end %>
+</div>
+</div>
