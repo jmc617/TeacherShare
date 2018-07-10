@@ -1,33 +1,51 @@
+<div class="card text-center card-background">
+
+<div class="inner-card-background">
 
 <% @post.images.each do |i| %>
   <%= image_tag i %>
 <%end%>
 
+<div>
+  <h3><%= @post.title %></h3>
+  <% if @post.teacher_id == current_teacher.id %>
+    <a href="/groups/<%= @post.group_id %>/posts/<%=@post.id%>/edit">edit</a>
+  <% end %>
+</div>
+
+<%= form_for @save_post do |f| %>
+  <%= hidden_field_tag(:post_id, @post.id) %>
+  <%= f.submit "save post"%>
+<%end%>
+
 <div><%= @post.description%></div>
 
 <% if @post.price == 0 %>
-  <div id='free-post'>FREE</div>
+  <div class='free-post'>FREE</div>
 <% else %>
   <div>$<%= @post.price%></div>
 <% end %>
 
 <div class="">Posted in: <%=Group.find(@post.group_id).name%></div>
 <a href="/teachers/<%= @post.teacher_id %>">Posted by:<%= Teacher.find(@post.teacher_id).username %></a>
-
-Comments:
+<hr>
+<h4>Comments:</h4>
+<hr>
 <% @post.post_comments.each do |c| %>
-  <div><%= c.content %>/<%= Teacher.find(c.teacher_id).username %></div>
+  <div><%= c.content %></div>
+  <div>-<%= Teacher.find(c.teacher_id).username %></div>
 
   <% if c.teacher_id == current_teacher.id %>
     <%= link_to "edit comment", "/groups/#{@group.id}/posts/#{@post.id}/post_comments/#{c.id}/edit", class:"" %>
   <%end%>
   <hr>
+<%end%>
 
 <% if @post.teacher_id == current_teacher.id %>
   <%= link_to "edit post", "/groups/#{@post.group_id}/posts/#{@post.id}/edit", class:"" %>
 <% end %>
 
-<% if @membership != nil%>
+
     <div class=''>
       <%= form_for [@group, @post, @post_comment] do |f| %>
           comment:<%= f.text_field :content %>
@@ -35,6 +53,7 @@ Comments:
       <%end%>
     </div>
 
-    <div class="comment-btns">JS comment button</div>
-  <% end %>
-<% end %>
+    <!-- <div class="comment-btns">JS comment button</div> -->
+
+</div>
+</div>

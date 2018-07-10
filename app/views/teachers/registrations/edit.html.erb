@@ -1,8 +1,10 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="card text-center">
 
-<% if resource.avatar.attached? %>
+<h2>Edit Account</h2>
 
-  <%= image_tag resource.avatar %>
+<% if current_teacher.avatar.attached? %>
+
+  <%= image_tag current_teacher.avatar %>
   <%= link_to 'Remove', "/teachers/#{resource.id}/delete_avatar",
               method: :delete,
               data: { confirm: 'Are you sure?' } %>
@@ -69,3 +71,5 @@
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>
+
+</div>

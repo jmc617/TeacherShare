@@ -1,0 +1,24 @@
+<div class="card card-background">
+
+<div class="inner-card-background">
+<div>
+  <% @messages.each do |message| %>
+    <% if message.body %>
+      <div id='msg-text'>
+      <strong><%= message.teacher.username %>:</strong>
+      <%= message.body %>
+    </div>
+      <hr>
+    <% end %>
+  <% end %>
+</div>
+
+<%= form_for [@conversation, @message] do |f| %>
+  <div class="field">
+    <%= f.text_area :body, placeholder: "Your message" %>
+  </div>
+
+  <%= f.submit "Send" %>
+<% end %>
+</div>
+</div>

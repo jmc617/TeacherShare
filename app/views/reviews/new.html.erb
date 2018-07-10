@@ -1,11 +1,15 @@
 <% if teacher_signed_in? %>
+<div class="card text-center card-background">
+
+<div class="inner-card-background">
+
 
   <%= form_for @review do |f| %>
     <%= f.label :product %>
-    <%= f.text_field :product %>
+    <div><%= f.text_field :product %></div>
 
     <%= f.label :content %>
-    <%= f.text_field :content %>
+    <div><%= f.text_area :content %></div>
 
     <div class="field">
       <%= f.label :upload_images %><br />
@@ -15,6 +19,8 @@
     <%= f.submit "create review"%>
   <%end%>
 
+</div>
+</div>
 <% else %>
 
   <h2>Sorry! You must be signed in to write a review</h2>

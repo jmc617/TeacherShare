@@ -1,13 +1,15 @@
 <% if @review.teacher_id == current_teacher.id %>
+<div class="card text-center card-background">
 
-<div class='card'>
+<div class="inner-card-background">
+
   <h2>edit review</h2>
 
   <% @review.pictures.each_with_index do |ph, i| %>
   <%= image_tag ph %>
-  <%= link_to 'Remove', "/reviews/#{@review.id}/delete_picture_attachment/#{i}",
+  <div><%= link_to 'Remove', "/reviews/#{@review.id}/delete_picture_attachment/#{i}",
                 method: :delete,
-                data: { confirm: 'Are you sure?' } %>
+                data: { confirm: 'Are you sure?' } %></div>
   <%end%>
 
 
@@ -25,6 +27,7 @@
 
   <%= link_to 'Delete', review_path(@review), method: :delete, data:
   { confirm: 'Are you sure?' } %>
+</div>
 </div>
 
 <% else %>

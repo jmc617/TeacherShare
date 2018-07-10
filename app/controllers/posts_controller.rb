@@ -7,6 +7,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
     @membership = Membership.find_by(group_id: params[:group_id], teacher_id: current_teacher.id)
+    @save_post = SavePost.new
   end
 
   def new
@@ -24,7 +25,7 @@ class PostsController < ApplicationController
     if params[:images] != nil
       post.images.attach(params[:post][:images])
     end
-    
+
     if post.save!
       flash[:notice] = 'post created!'
       redirect_to "/"
@@ -77,6 +78,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:group_id, :title, :description, :price, :images)
+    params.require(:post).permit(:group_id, :title, :description, :price, :images, :request)
   end
 end

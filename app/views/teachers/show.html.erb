@@ -1,26 +1,42 @@
+<div class="card text-center card-background">
 
+<div class='inner-card-background'>
 <% if @teacher.avatar = nil %>
   <%= image_tag @teacher.avatar %>
 <% end %>
 
-<%= @teacher.username %>
-<%= @teacher.email %>
-<%= @teacher.location %>
-<%= @teacher.aboutMe %>
-
-<h3>products reviewed:</h3>
-<% @reviews.reverse.each do |r| %>
-  <%= link_to "#{r.product}", "/reviews/#{r.id}", class:"" %>
+<h2><%= @teacher.username %></h2>
+<div><%= @teacher.email %></div>
+<div><%= @teacher.location %></div>
+<div><%= @teacher.aboutMe %></div>
+<% if @teacher.id != current_teacher.id %>
+  <%= link_to 'send message', conversations_path(sender_id: current_teacher.id, receiver_id: @teacher.id), method: :post %>
 <% end %>
+<hr>
+<h3>created groups</h3>
+  <% Group.where("teacher_id = #{@teacher.id}").each do |g|%>
+    <div><%= link_to "#{g.name}", "/groups/#{g.id}", class:"" %></div>
+  <%end%>
+  <hr>
+
+<h3>products reviewed</h3>
+<% @reviews.reverse.each do |r| %>
+  <div><%= link_to "#{r.product}", "/reviews/#{r.id}", class:"" %></div>
+<% end %>
+<hr>
 
 <% if @teacher.id == current_teacher.id %>
   <% if @posts != nil %>
   <h3>posts</h3>
   <% @posts.reverse.each do |o| %>
 
-    <%= link_to "#{o.title}-#{Group.find(o.group_id).name}", "/groups/#{o.group_id}/posts/#{o.id}", class:"" %>
+    <div><%= link_to "#{o.title}-#{Group.find(o.group_id).name}", "/groups/#{o.group_id}/posts/#{o.id}", class:"" %></div>
 
   <% end %>
   <% end %>
+  <hr>
   <%= link_to 'edit profile', edit_teacher_registration_path, class:"" %>
 <% end %>
+
+</div>
+</div>

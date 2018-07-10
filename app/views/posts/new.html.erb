@@ -1,13 +1,23 @@
+<div class="card text-center card-background">
+
+<div class="inner-card-background">
 
 <% if @membership != nil %>
 
 <%= form_for [@group, @post] do |f| %>
   <%= f.label :title%>
-  <%= f.text_field :title %>
+  <div><%= f.text_field :title %></div>
+  <div><%= f.label :request?%></div>
+  <div>
+  <%= f.label :yes%>
+  <%= f.radio_button :request, true %>
+  <%= f.label :no %>
+  <%= f.radio_button :request, false %>
+</div>
   <%= f.label :description%>
-  <%= f.text_area :description %>
+  <div><%= f.text_area :description %></div>
   <%= f.label :price%>
-  <%= f.text_field :price, placeholder: 'put 0 if free' %>
+  <div><%= f.text_field :price, placeholder: 'put 0 if free or request' %></div>
   <div class="field">
     <%= f.label :upload_images %><br />
     <%= f.file_field :images, multiple:true, direct_upload: true %>
@@ -21,3 +31,5 @@
 <h2> Sorry! Must be a member of this group to create posts. </h2>
 
 <% end %>
+</div>
+</div>

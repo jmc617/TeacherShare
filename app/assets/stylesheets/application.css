@@ -10,6 +10,55 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+
  *= require_tree .
  *= require_self
+
  */
+ *{
+   font-family: 'Work Sans', sans-serif;
+ }
+.navbar{
+  margin-bottom: 0;
+}
+.navbar-item{
+  margin: auto;
+  text-decoration: none;
+  font-weight: bold;
+}
+.navbar-item:hover{
+  background-color: #110045;
+}
+.navbar-item:hover, .nav-link{
+  color: white;
+}
+a{
+  text-decoration: none !important;
+}
+.navbar-brand{
+  font-family: 'Oswald', sans-serif;
+  font-size: 40px;
+}
+.logged-out-links{
+  float: right;
+  margin: 0;
+}
+.card-background{
+  background-color: #110045
+}
+.inner-card-background{
+  background-color: white;
+  width: 50%;
+  text-align: center;
+  margin: 20px auto !important;
+}
+.carousel-caption{
+  color: white;
+
+}
+.free-post{
+  padding: 5px;
+  color: white;
+  background-color: green;
+  display: inline;
+}

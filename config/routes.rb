@@ -2,9 +2,15 @@ Rails.application.routes.draw do
 
   root "reviews#index"
 
+  resources :save_posts
+
   delete "/reviews/:review_id/delete_picture_attachment/:index", to: 'reviews#delete_picture_attachment'
 
   delete "/posts/:post_id/delete_image_attachment/:index", to: 'posts#delete_image_attachment'
+
+  resources :conversations, only: [:index, :create] do
+    resources :messages, only: [:index, :create]
+  end
 
   resources :reviews do
     resources :review_comments

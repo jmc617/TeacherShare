@@ -1,5 +1,7 @@
+<div class="card text-center card-background">
 
-<div class='card'>
+<div class="inner-card-background">
+
 
   <% if teacher_signed_in? && @group.teacher_id == current_teacher.id %>
     <h2>edit group</h2>
@@ -20,4 +22,5 @@
   <% else %>
     <h2>Sorry! Only the creators of groups are allowed to edit them.</h2>
   <% end %>
+</div>
 </div>
