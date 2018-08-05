@@ -5,6 +5,9 @@ ruby '2.4.1'
 #added gems
 gem 'devise'
 gem 'jquery-rails'
+gem 'paperclip'
+gem 'aws-sdk', '~> 3.0', '>= 3.0.1'
+gem 'aws-sdk-s3', '~> 1.0.0.rc2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
 # Use sqlite3 as the database for Active Record

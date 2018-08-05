@@ -22,10 +22,6 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.teacher_id = current_teacher.id
 
-    if params[:pictures] != nil
-      @review.pictures.attach(params[:review][:pictures])
-    end
-
     if @review.save!
       flash[:notice] = 'review created!'
       redirect_to "/reviews"
@@ -83,6 +79,6 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:product, :content, :pictures)
+    params.require(:review).permit(:product, :content, :image)
   end
 end
