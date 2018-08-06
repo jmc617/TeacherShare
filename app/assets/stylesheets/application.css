@@ -72,3 +72,9 @@ a{
   background-color: green;
   display: inline;
 }
+.request-post{
+  padding: 5px;
+  color: white;
+  background-color: red;
+  display: inline;
+}

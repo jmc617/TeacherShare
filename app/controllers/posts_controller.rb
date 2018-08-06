@@ -22,10 +22,6 @@ class PostsController < ApplicationController
     post.group_id = group.id
     post.teacher_id = current_teacher.id
 
-    if params[:images] != nil
-      post.images.attach(params[:post][:images])
-    end
-
     if post.save!
       flash[:notice] = 'post created!'
       redirect_to "/"
@@ -42,7 +38,6 @@ class PostsController < ApplicationController
 
   def update
     post = Post.find(params[:id])
-    post.images.attach(params[:post][:images])
 
     if post.update(post_params)
       flash[:notice] = 'post updated!'
@@ -64,20 +59,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def delete_image_attachment
-    @post = Post.find(params[:post_id])
-    @selected_image = @post.images[params[:index].to_i]
-
-    if @selected_image.purge
-      flash[:notice] = 'image removed'
-      redirect_to "/groups/#{@post.group_id}/posts/#{@post.id}/edit"
-    else
-      flash[:alert] = 'error. please try again'
-      render "/groups/#{@post.group_id}/posts/#{@post.id}/edit"
-    end
-  end
-
   def post_params
-    params.require(:post).permit(:group_id, :title, :description, :price, :images, :request)
+    params.require(:post).permit(:group_id, :title, :description, :price, :image, :request)
   end
 end

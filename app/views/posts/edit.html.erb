@@ -3,28 +3,30 @@
 <div class="inner-card-background">
 <h2>edit post</h2>
 
+<%= image_tag @post.image.url(:square) %>
+
 <% if @post.teacher_id == current_teacher.id %>
 
-<% @post.images.each_with_index do |ph, i| %>
-<%= image_tag ph %>
-<%= link_to 'Remove', "/posts/#{@post.id}/delete_image_attachment/#{i}",
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-<%end%>
-
-
-<%= form_for [@group, @post] do |f| %>
-    <div>Title</div>
-    <div><%= f.text_field :title %></div>
-    <div>Content</div>
-    <div><%= f.text_area :description %></div>
-    <div>Price</div>
-    <div><%= f.text_field :price %></div>
-    <div class="field">
-      <%= f.label :upload_images %><br />
-      <%= f.file_field :images, multiple:true, direct_upload: true %>
-    </div>
-    <div><%= f.submit "publish changes"%></div>
+<%= form_for [@group, @post], multipart: true do |f| %>
+  <%= f.label :title%>
+  <div><%= f.text_field :title %></div>
+  <div><%= f.label :request?%></div>
+  <div>
+  <%= f.label :yes%>
+  <%= f.radio_button :request, true %>
+  <%= f.label :no %>
+  <%= f.radio_button :request, false %>
+</div>
+  <%= f.label :description%>
+  <div><%= f.text_area :description %></div>
+  <%= f.label :price%>
+  <div><%= f.text_field :price, placeholder: 'put 0 if free or request' %></div>
+  <div >
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+  <%= hidden_field_tag(:group_id, :group_id) %>
+  <%= f.submit "save changes"%>
 <%end%>
 
 <%= link_to 'Delete', group_post_path(@post), method: :delete,

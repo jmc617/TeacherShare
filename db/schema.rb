@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_032116) do
+ActiveRecord::Schema.define(version: 2018_08_05_165515) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -83,6 +83,10 @@ ActiveRecord::Schema.define(version: 2018_08_05_032116) do
     t.integer "group_id"
     t.integer "teacher_id"
     t.boolean "request"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "review_comments", force: :cascade do |t|

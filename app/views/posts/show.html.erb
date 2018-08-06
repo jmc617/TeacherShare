@@ -2,9 +2,7 @@
 
 <div class="inner-card-background">
 
-<% @post.images.each do |i| %>
-  <%= image_tag i %>
-<%end%>
+<%= image_tag @post.image.url(:medium) %>
 
 <div>
   <h3><%= @post.title %></h3>
@@ -20,8 +18,10 @@
 
 <div><%= @post.description%></div>
 
-<% if @post.price == 0 %>
+<% if @post.price == 0 && @post.request == false%>
   <div class='free-post'>FREE</div>
+<% elsif @post.request == true %>
+    <div class='request-post'>REQUEST</div>
 <% else %>
   <div>$<%= @post.price%></div>
 <% end %>
@@ -31,18 +31,19 @@
 <hr>
 <h4>Comments:</h4>
 <hr>
-<% @post.post_comments.each do |c| %>
-  <div><%= c.content %></div>
-  <div>-<%= Teacher.find(c.teacher_id).username %></div>
 
-  <% if c.teacher_id == current_teacher.id %>
-    <%= link_to "edit comment", "/groups/#{@group.id}/posts/#{@post.id}/post_comments/#{c.id}/edit", class:"" %>
+  <% @post.post_comments.each do |c| %>
+  <%= c.content %>
+  <a href="/teachers/<%= c.teacher_id %>"><%= Teacher.find(c.teacher_id).username%></a>
+    <% if teacher_signed_in? && c.teacher_id == current_teacher.id %>
+      <%= link_to "edit", "/groups/#{@group.id}/posts/#{@post.id}/post_comments/#{c.id}/edit", class:"" %>
+    <% end %>
+    <hr>
   <%end%>
-  <hr>
-<%end%>
+
 
 <% if @post.teacher_id == current_teacher.id %>
-  <%= link_to "edit post", "/groups/#{@post.group_id}/posts/#{@post.id}/edit", class:"" %>
+  <%= link_to "edit", "/groups/#{@post.group_id}/posts/#{@post.id}/edit", class:"" %>
 <% end %>
 
 

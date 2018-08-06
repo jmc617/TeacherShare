@@ -5,7 +5,7 @@
 
   <h2>edit review</h2>
 
-  <%= image_tag @review.image.url(:square) %>
+  <%= image_tag @review.image.url(:medium) %>
 
   <%= form_for(@review, multipart: true) do |f| %>
     <%= f.label :product %>
@@ -22,7 +22,7 @@
 
     <%= f.submit "create review"%>
   <%end%>
-  
+
   <%= link_to 'Delete', review_path(@review), method: :delete, data:
   { confirm: 'Are you sure?' } %>
 </div>

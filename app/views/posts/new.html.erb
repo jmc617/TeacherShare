@@ -4,7 +4,7 @@
 
 <% if @membership != nil %>
 
-<%= form_for [@group, @post] do |f| %>
+<%= form_for [@group, @post], multipart: true do |f| %>
   <%= f.label :title%>
   <div><%= f.text_field :title %></div>
   <div><%= f.label :request?%></div>
@@ -18,10 +18,10 @@
   <div><%= f.text_area :description %></div>
   <%= f.label :price%>
   <div><%= f.text_field :price, placeholder: 'put 0 if free or request' %></div>
-  <!-- <div class="field">
-    <%= f.label :upload_images %><br />
-    <%= f.file_field :images, multiple:true, direct_upload: true %>
-  </div> -->
+  <div >
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
   <%= hidden_field_tag(:group_id, :group_id) %>
   <%= f.submit "create post"%>
 <%end%>
