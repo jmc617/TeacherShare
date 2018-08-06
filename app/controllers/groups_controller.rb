@@ -34,10 +34,6 @@ class GroupsController < ApplicationController
     group = Group.new(group_params)
     group.teacher_id = current_teacher.id
 
-    if params[:pictures] != nil
-      group.pictures.attach(params[:group][:pictures])
-    end
-
     if group.save
       flash[:notice] = 'group created!'
       redirect_to "/"
@@ -53,6 +49,7 @@ class GroupsController < ApplicationController
 
   def update
     @group = Group.find(params[:id])
+
     if @group.update(group_params)
       flash[:notice] = 'group updated!'
       redirect_to "/groups/#{@group.id}"
@@ -74,6 +71,6 @@ class GroupsController < ApplicationController
   end
 
   def group_params
-    params.require(:group).permit(:name, :description, :pictures)
+    params.require(:group).permit(:name, :description)
   end
 end

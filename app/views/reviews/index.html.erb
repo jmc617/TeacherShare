@@ -10,9 +10,7 @@
 
   <% @reviews.reverse.take(5).each do |r| %>
     <div class='card text-center'>
-      <% if r.pictures[0] != nil %>
-        <div><%= image_tag r.pictures[0] %></div>
-      <% end %>
+      <div><%= image_tag r.image.url(:medium) %></div>
       <%= link_to "#{r.product}", "/reviews/#{r.id}", class:"" %>
       Written by: <a href="/teachers/<%=r.teacher_id%>"><%= Teacher.find(r.teacher_id).username %></a>
 

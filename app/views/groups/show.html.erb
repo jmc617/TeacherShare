@@ -1,14 +1,10 @@
 <div id="groups-show-wrapper" >
 
-
   <div id='group-info'>
     <div class="card text-center card-background">
 
     <div class="inner-card-background">
 
-  <% @group.pictures.each do |i| %>
-    <%= image_tag i %>
-  <%end%>
   <h1><%= @group.name %></h1>
 
   <% if teacher_signed_in? && @group.teacher_id == current_teacher.id %>
@@ -67,13 +63,13 @@
 <h3>Posts:</h3>
 <% @posts.reverse.take(5).each do |o| %>
  <div class='card'>
-  <% if o.images[0] != nil %>
-    <div><%= image_tag o.images[0] %></div>
-  <% end %>
+   <div><%= image_tag o.image.url(:medium) %></div>
   <%= link_to "#{o.title}", "/groups/#{@group.id}/posts/#{o.id}", class:"" %>
   <div><%= o.description%></div>
-  <% if o.price == 0 %>
+  <% if o.price == 0 && o.request == false%>
     <div class='free-post'>FREE</div>
+  <% elsif o.request == true %>
+      <div class='request-post'>REQUEST</div>
   <% else %>
     <div>$<%= o.price%></div>
   <% end %>

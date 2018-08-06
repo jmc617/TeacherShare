@@ -1,3 +1,6 @@
+<div class="card text-center card-background">
+
+<div class="inner-card-background">
 
 <% if @post_comment.teacher_id == current_teacher.id %>
   <%= form_for [@group, @post, @post_comment] do |f| %>
@@ -11,3 +14,6 @@
 <% else %>
   <h2>Sorry! You must be the owner of the comment to edit it.</h2>
 <% end %>
+
+</div>
+</div>

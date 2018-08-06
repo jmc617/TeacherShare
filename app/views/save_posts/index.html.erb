@@ -7,12 +7,16 @@
 <div class='card text-center card-background saved'>
   <div class='inner-card-background'>
   <% post = Post.find(s.post_id) %>
-  <% if post.images[0] != nil %>
-    <div><%= image_tag post.images[0] %></div>
-    <hr>
-  <% end %>
+  <div><%= image_tag post.image.url(:medium) %></div>
 
     <h4><%= link_to "#{post.title}", "/groups/#{post.group_id}/posts/#{post.id}", class:"" %></h4>
+    <% if post.price == 0 && post.request == false%>
+      <div class='free-post'>FREE</div>
+    <% elsif post.request == true %>
+        <div class='request-post'>REQUEST</div>
+    <% else %>
+      <div>$<%= post.price%></div>
+    <% end %>
     <div>
     <%= link_to 'delete', "/save_posts/#{s.id}",class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
   </div>

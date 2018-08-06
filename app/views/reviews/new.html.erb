@@ -1,28 +1,24 @@
-<% if teacher_signed_in? %>
+
 <div class="card text-center card-background">
 
 <div class="inner-card-background">
 
 
-  <%= form_for @review do |f| %>
+  <%= form_for(@review, multipart: true) do |f| %>
     <%= f.label :product %>
     <div><%= f.text_field :product %></div>
 
     <%= f.label :content %>
     <div><%= f.text_area :content %></div>
 
-    <!-- <div class="field">
-      <%= f.label :upload_images %><br />
-      <%= f.file_field :pictures, multiple:true, direct_upload: true %>
-    </div> -->
+    <div >
+      <%= f.label :image %>
+      <%= f.file_field :image %>
+    </div>
+
 
     <%= f.submit "create review"%>
   <%end%>
 
 </div>
 </div>
-<% else %>
-
-  <h2>Sorry! You must be signed in to write a review</h2>
-
-<% end %>

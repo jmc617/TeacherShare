@@ -1,9 +1,7 @@
 <div class="card text-center card-background">
 
 <div class="inner-card-background">
-<% @review.pictures.each do |i| %>
-<%= image_tag i %>
-<%end%>
+<%= image_tag @review.image.url(:medium) %>
 <div>Product: <%= @review.product %></div>
 <div><%= @review.content %></div>
 <div><a href="/teachers/<%= @review.teacher_id %>">-<%= Teacher.find(@review.teacher_id).username %></a></div>

@@ -54,11 +54,27 @@ a{
 }
 .carousel-caption{
   color: white;
+  position: absolute;
+  top: 100px;
+  text-shadow: 2px 2px 4px #000000;
 
+}
+.caption-h2{
+  /* font-weight: bold; */
+  font-size: 70px;
+}
+.caption-p{
+  font-size: 30px;
 }
 .free-post{
   padding: 5px;
   color: white;
   background-color: green;
+  display: inline;
+}
+.request-post{
+  padding: 5px;
+  color: white;
+  background-color: red;
   display: inline;
 }
