@@ -7,7 +7,7 @@
 <div><%= @teacher.email %></div>
 <div><%= @teacher.location %></div>
 <div><%= @teacher.aboutMe %></div>
-<% if @teacher.id != current_teacher.id %>
+<% if teacher_signed_in? && @teacher.id != current_teacher.id %>
   <%= link_to 'send message', conversations_path(sender_id: current_teacher.id, receiver_id: @teacher.id), method: :post %>
 <% end %>
 <hr>
@@ -23,7 +23,7 @@
 <% end %>
 <hr>
 
-<% if @teacher.id == current_teacher.id %>
+<% if teacher_signed_in? && @teacher.id == current_teacher.id %>
   <% if @posts != nil %>
   <h3>posts</h3>
   <% @posts.reverse.each do |o| %>
