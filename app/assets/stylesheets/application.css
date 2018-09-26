@@ -78,3 +78,12 @@ a{
   background-color: red;
   display: inline;
 }
+.guest-user-btn{
+  width: 30%;
+  margin: 0 auto;
+  padding: 5px;
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
