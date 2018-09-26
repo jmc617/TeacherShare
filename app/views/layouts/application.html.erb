@@ -48,12 +48,9 @@
     </div>
 
     <% else %>
-      <div class='navbar-item logged-out-links'>
-        <%= link_to 'signup', new_teacher_registration_path, class:"nav-link float-right" %>
-      </div>
 
       <div class='navbar-item logged-out-links'>
-        <%= link_to 'login', new_teacher_session_path, class:"nav-link float-right" %>
+        <%= link_to 'login/signup', new_teacher_session_path, class:"nav-link float-right" %>
       </div>
 
     <% end %>
