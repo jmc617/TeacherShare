@@ -1,24 +1,6 @@
-# README
+TeacherShare
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+TeacherShare is a full stack Ruby on Rails website designed to save teachers money on classroom resources. It allows teachers to write reviews for products so that other teachers know if they are worth the money. It also allows teachers to create groups for their community/school. In those groups teachers can share and request resources with each other. Teachers can also save posts for later and message each other privately. It was created as a final project at New York Code + Design Academy in July 2018.
 
-Things you may want to cover:
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
